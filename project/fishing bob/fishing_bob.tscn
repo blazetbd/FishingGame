@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtd8rgg6s1ux4"]
+
+[ext_resource type="Texture2D" uid="uid://cq06iopdgrvcl" path="res://assets/textures/fishnbob.png" id="1_20pmf"]
+[ext_resource type="Script" uid="uid://kwljmmqnjkyd" path="res://fishing bob/fishing_bob.gd" id="1_ua0r3"]
+[ext_resource type="Script" uid="uid://djynkw2j4knbd" path="res://fishing bob/sprite_2d.gd" id="3_8vxd2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dogr6"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua0r3"]
+atlas = ExtResource("1_20pmf")
+region = Rect2(47.8229, 47.943, 16.1771, 16.057)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_20pmf"]
+radius = 8.0
+
+[node name="FishingBob" type="RigidBody2D"]
+z_index = -1
+texture_filter = 1
+collision_mask = 2
+script = ExtResource("1_ua0r3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dogr6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 1)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_ua0r3")
+script = ExtResource("3_8vxd2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_20pmf")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

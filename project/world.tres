@@ -1,0 +1,39 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://xgyi0a8i22mv"]
+
+[ext_resource type="Texture2D" uid="uid://cwjk1mnit3ofu" path="res://assets/textures/tilemap.png" id="1_dbpwn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fj7yv"]
+texture = ExtResource("1_dbpwn")
+separation = Vector2i(2, 2)
+texture_region_size = Vector2i(21, 21)
+3:6/0 = 0
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.5, -10.5, 10.5, -10.5, 10.5, 10.5, -10.5, 10.5)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.5, -10.5, 10.5, -10.5, 10.5, 10.5, -10.5, 10.5)
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.5, -10.5, 10.5, -10.5, 10.5, 10.5, -10.5, 10.5)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.5, -10.5, 10.5, -10.5, 10.5, 10.5, -10.5, 10.5)
+2:5/0 = 0
+10:1/0 = 0
+10:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-10.5, -10.5, 10.5, -10.5, 10.5, 10.5, -10.5, 10.5)
+10:1/0/custom_data_0 = true
+11:0/0 = 0
+11:0/0/custom_data_0 = true
+7:18/0 = 0
+7:19/0 = 0
+8:19/0 = 0
+8:18/0 = 0
+9:18/0 = 0
+9:19/0 = 0
+10:19/0 = 0
+10:18/0 = 0
+
+[resource]
+tile_size = Vector2i(21, 21)
+physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 2
+custom_data_layer_0/name = "is_water"
+custom_data_layer_0/type = 1
+sources/1 = SubResource("TileSetAtlasSource_fj7yv")

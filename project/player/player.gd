@@ -1,13 +1,42 @@
 extends CharacterBody2D
 
 
-var _held = false
+@export var fishing_bob: PackedScene
+@export var min_windup_time: float = .1
+@export var max_windup_time:float = 2.0
+@export var min_force: float = 100.0
+@export var max_force: float = 500.0
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("fish_button"):
+var _held := false
+var held_start_time: float = 0.0
+var fishing := false
+
+
+func _physics_process(_delta: float) -> void:
+	if Input.is_action_just_pressed("fish_button"):
 		_held = true
-	elif event.is_action_released("fish_button"):
-		_held = false
+		held_start_time = Time.get_ticks_msec() / 1000.0
+	elif Input.is_action_just_released("fish_button"):
+		if _held:
+			_held = false
+			var held_duration = (Time.get_ticks_msec() / 1000.0) - held_start_time
+			launch_bob(held_duration)
+
+
+func launch_bob(duration: float) -> void:
+	var clamped_duration = clamp(duration, min_windup_time, max_windup_time)
+	var launch_force = lerp(min_force, max_force, (clamped_duration - min_windup_time) / (max_windup_time - min_windup_time))
 	
-	print(_held)
+	var new_object = fishing_bob.instantiate()
+	
+	var angle_offset = -PI / 4
+	var launch_direction = Vector2(1, 0).rotated(rotation + angle_offset).normalized()
+	
+	var spawn_offset = launch_direction * 20
+	new_object.global_position = global_position + spawn_offset
+	
+	get_parent().add_child(new_object)
+	
+	if new_object is RigidBody2D:
+		new_object.apply_central_impulse(launch_direction * launch_force)

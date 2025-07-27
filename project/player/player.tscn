@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp3j0kch311oq"]
+[gd_scene load_steps=7 format=3 uid="uid://bp3j0kch311oq"]
 
 [ext_resource type="Texture2D" uid="uid://b721wyx5uecpa" path="res://assets/textures/player_sprites.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://bdemq4am6jj2g" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="PackedScene" uid="uid://dtd8rgg6s1ux4" path="res://fishing bob/fishing_bob.tscn" id="2_g1dw6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kqu6x"]
 height = 34.0
@@ -24,6 +25,8 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 script = ExtResource("1_rkbax")
+fishing_bob = ExtResource("2_g1dw6")
+max_force = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kqu6x")
@@ -31,3 +34,7 @@ shape = SubResource("CapsuleShape2D_kqu6x")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g1dw6")
 animation = &"idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(85, 0)
+zoom = Vector2(2.5, 2.5)
