@@ -26,7 +26,6 @@ animations = [{
 texture_filter = 1
 script = ExtResource("1_rkbax")
 fishing_bob = ExtResource("2_g1dw6")
-max_force = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kqu6x")
@@ -44,3 +43,7 @@ z_index = -2
 position = Vector2(85, 0)
 width = 1.0
 default_color = Color(0, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

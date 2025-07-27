@@ -12,10 +12,17 @@ var _held := false
 var held_start_time: float = 0.0
 var fishing := false
 var curr_bob: RigidBody2D
+var fishing_cd := 10
 
 
 @onready var line_2d: Line2D = $Line2D
+@onready var timer: Timer = $Timer
 
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("fish_button"):
+		if _held and !fishing:
+			start_fishing()
 
 func _physics_process(_delta: float) -> void:
 	if line_2d and curr_bob:
@@ -32,6 +39,7 @@ func _physics_process(_delta: float) -> void:
 		else:
 			curr_bob.queue_free()
 			reset_line()
+			fishing_cd = 10
 			fishing = false
 	elif Input.is_action_just_released("fish_button"):
 		if _held and !fishing:
@@ -39,6 +47,10 @@ func _physics_process(_delta: float) -> void:
 			_held = false
 			var held_duration = (Time.get_ticks_msec() / 1000.0) - held_start_time
 			launch_bob(held_duration)
+
+
+func start_fishing() -> void:
+	timer.start(1)
 
 
 func launch_bob(duration: float) -> void:
@@ -65,3 +77,15 @@ func reset_line():
 			Vector2.ZERO,                        
 			Vector2.ZERO
 		]
+
+
+func _on_timer_timeout() -> void:
+	fishing_cd -= 1
+	print(fishing_cd)
+	
+	var rng = RandomNumberGenerator.new()
+	var random_number = rng.randi_range(1,10)
+	
+	if random_number == 1 or fishing_cd <= 0:
+		timer.stop()
+		print("Fish!")

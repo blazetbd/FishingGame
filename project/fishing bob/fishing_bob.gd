@@ -9,7 +9,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		await get_tree().create_timer(.5).timeout
 		var buoyancy_force = Vector2(0, -buoyancy_force_magnitude)
 		state.apply_central_force(buoyancy_force)
-		print("floating!")
+		#print("floating!")
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -20,7 +20,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 		if tile_data and tile_data.has_custom_data("is_water") and tile_data.get_custom_data("is_water"):
 			on_floatable_tile = true
-			print("water baby!!")
+			#print("water baby!!")
 		else:
 			on_floatable_tile = false
 	else:
