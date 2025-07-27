@@ -6,6 +6,7 @@ var on_floatable_tile: bool = false
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if on_floatable_tile:
+		await get_tree().create_timer(.5).timeout
 		var buoyancy_force = Vector2(0, -buoyancy_force_magnitude)
 		state.apply_central_force(buoyancy_force)
 		print("floating!")
@@ -27,7 +28,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	await get_tree().create_timer(.1).timeout
 	if body is TileMapLayer:
 		var tile_map = body as TileMapLayer
 		var tile_coords = tile_map.local_to_map(global_position)
